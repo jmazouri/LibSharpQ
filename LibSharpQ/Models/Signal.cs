@@ -10,7 +10,7 @@ namespace LibSharpQ.Models
 {
     public class Signal
     {
-        private static Regex _locationZoneRegex = new Regex(@"(\d*),(\d*)");
+        private static readonly Regex _locationZoneRegex = new Regex(@"(\d*),(\d*)", RegexOptions.Compiled);
 
         [JsonIgnoreSerialization]
         public int Id { get; set; }
@@ -37,6 +37,9 @@ namespace LibSharpQ.Models
         [JsonConverter(typeof(UnixDateTimeMsConverter))]
         public DateTime UpdatedAt { get; set; }
 
+        /// <summary>
+        /// The x,y position of this signal, if the zone is coordinate-based. Otherwise, (-1, -1)
+        /// </summary>
         [JsonIgnore]
         public (int x, int y) ZonePosition
         {

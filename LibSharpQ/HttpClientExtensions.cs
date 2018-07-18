@@ -11,13 +11,16 @@ namespace LibSharpQ
     {
         public static async Task<T> GetResult<T>(this HttpClient client, HttpRequestMessage msg)
         {
-            var response = await client.SendAsync(msg);
+            var response = await client.SendAsync(msg).ConfigureAwait(false);
 
             response.EnsureSuccessStatusCode();
 
-            string responseContent = await response.Content.ReadAsStringAsync();
+            string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-            return JsonConvert.DeserializeObject<T>(responseContent);
+            using (response)
+            {
+                return JsonConvert.DeserializeObject<T>(responseContent);
+            }
         }
     }
 }

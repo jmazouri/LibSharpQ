@@ -13,22 +13,27 @@ namespace LibSharpQ
     public abstract class BaseDasClient : IDasClient, IDisposable
     {
         public string BaseUrl { get; protected set; }
+
         protected HttpClient _client;
 
-        public BaseDasClient(string baseUrl)
+        private bool _shouldDispose = false;
+        private bool _disposed = false;
+
+        protected BaseDasClient(HttpClient client, string baseUrl)
         {
             BaseUrl = baseUrl;
+            _client = client;
+        }
 
-            _client = new HttpClient
-            {
-                BaseAddress = new Uri(BaseUrl)
-            };
+        protected BaseDasClient(string baseUrl) : this(new HttpClient { BaseAddress = new Uri(baseUrl) }, baseUrl)
+        {
+            _shouldDispose = true;
         }
 
         public async Task DeleteSignal(int signalId)
         {
             var msg = new HttpRequestMessage(HttpMethod.Delete, $"api/1.0/signals/{signalId}");
-            await _client.SendAsync(msg);
+            await _client.SendAsync(msg).ConfigureAwait(false);
         }
 
         public abstract Task<IReadOnlyList<Signal>> GetSignals(bool retrieveAll = true);
@@ -46,31 +51,44 @@ namespace LibSharpQ
                 Content = new StringContent(serializedSignal, Encoding.UTF8, "application/json")
             };
 
-            return await _client.GetResult<Signal>(msg);
+            return await _client.GetResult<Signal>(msg).ConfigureAwait(false);
         }
 
-        public async Task DeleteSignals(IEnumerable<int> signalIds)
+        public virtual async Task DeleteSignals(IEnumerable<int> signalIds)
         {
-            foreach (var id in signalIds)
-            {
-                await DeleteSignal(id);
-            }
+            await Task.WhenAll(signalIds.Select(id => DeleteSignal(id))).ConfigureAwait(false);
         }
 
         public Task DeleteSignals(IEnumerable<Signal> signals)
         {
-            return DeleteSignals(signals);
+            return DeleteSignals(signals.Select(d=>d.Id));
         }
 
         public async Task DeleteAllSignals()
         {
-            var signals = await GetSignals();
-            await DeleteSignals(signals);
+            var signals = await GetSignals().ConfigureAwait(false);
+            await DeleteSignals(signals).ConfigureAwait(false);
         }
 
         public void Dispose()
         {
-            _client.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed && disposing && _shouldDispose)
+            {
+                _client.Dispose();
+            }
+
+            _disposed = true;
+        }
+
+        ~BaseDasClient()
+        {
+            Dispose(false);
         }
     }
 }

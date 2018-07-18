@@ -5,6 +5,9 @@ using Newtonsoft.Json;
 
 namespace LibSharpQ.Serialization
 {
+    /// <summary>
+    /// Deserializes DateTimes from Unix Time in Milliseconds
+    /// </summary>
     public class UnixDateTimeMsConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)

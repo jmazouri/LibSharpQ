@@ -16,7 +16,7 @@ namespace LibSharpQ.Serialization
 
         protected override List<MemberInfo> GetSerializableMembers(Type objectType)
         {
-            //Return properties that do NOT have the JsonIgnoreSerializationAttribute
+            //Ignore properties that have the JsonIgnoreSerialization attribute
             return base.GetSerializableMembers(objectType)
                              .Where(pi => !Attribute.IsDefined(pi, typeof(JsonIgnoreSerializationAttribute)))
                              .ToList();
