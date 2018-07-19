@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibSharpQ", "LibSharpQ\LibSharpQ.csproj", "{02AB105B-D067-4578-8F37-F0856D31B5B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibSharpQ", "LibSharpQ\LibSharpQ.csproj", "{02AB105B-D067-4578-8F37-F0856D31B5B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibSharpQ.Tests", "LibSharpQ.Tests\LibSharpQ.Tests.csproj", "{6D7DC3D3-1043-4E24-B242-79B57B9FBD7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibSharpQ.Tests", "LibSharpQ.Tests\LibSharpQ.Tests.csproj", "{6D7DC3D3-1043-4E24-B242-79B57B9FBD7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibSharpQ.Examples", "LibSharpQ.Examples\LibSharpQ.Examples.csproj", "{D63A3689-40A3-42F4-9670-1D9F12E88503}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibSharpQ.Examples", "LibSharpQ.Examples\LibSharpQ.Examples.csproj", "{D63A3689-40A3-42F4-9670-1D9F12E88503}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

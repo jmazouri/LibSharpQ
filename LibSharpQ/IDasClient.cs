@@ -33,7 +33,6 @@ namespace LibSharpQ
         /// <summary>
         /// Deletes all signals currently active
         /// </summary>
-        
         Task DeleteAllSignals();
         
         /// <summary>

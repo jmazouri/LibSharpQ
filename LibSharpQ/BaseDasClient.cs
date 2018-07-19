@@ -36,9 +36,14 @@ namespace LibSharpQ
             await _client.SendAsync(msg).ConfigureAwait(false);
         }
 
+        public Task DeleteSignal(Signal signal)
+        {
+            return DeleteSignal(signal.Id);
+        }
+
         public abstract Task<IReadOnlyList<Signal>> GetSignals(bool retrieveAll = true);
 
-        public async Task<Signal> SendSignal(Signal signal)
+        public virtual async Task<Signal> SendSignal(Signal signal)
         {
             string serializedSignal = JsonConvert.SerializeObject(signal, new JsonSerializerSettings
             {
@@ -59,12 +64,12 @@ namespace LibSharpQ
             await Task.WhenAll(signalIds.Select(id => DeleteSignal(id))).ConfigureAwait(false);
         }
 
-        public Task DeleteSignals(IEnumerable<Signal> signals)
+        public virtual Task DeleteSignals(IEnumerable<Signal> signals)
         {
             return DeleteSignals(signals.Select(d=>d.Id));
         }
 
-        public async Task DeleteAllSignals()
+        public virtual async Task DeleteAllSignals()
         {
             var signals = await GetSignals().ConfigureAwait(false);
             await DeleteSignals(signals).ConfigureAwait(false);

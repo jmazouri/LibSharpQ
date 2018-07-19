@@ -92,6 +92,8 @@ namespace LibSharpQ
         /// <returns>A collection of signals that were previously sent</returns>
         public override async Task<IReadOnlyList<Signal>> GetSignals(bool retrieveAll = true)
         {
+            EnsureLoggedIn();
+
             List<Signal> ret = new List<Signal>();
             int page = 0;
             bool hasMorePages = true;
@@ -113,6 +115,34 @@ namespace LibSharpQ
             }
 
             return ret;
+        }
+
+        public override Task<Signal> SendSignal(Signal signal)
+        {
+            EnsureLoggedIn();
+
+            return base.SendSignal(signal);
+        }
+
+        public override Task DeleteAllSignals()
+        {
+            EnsureLoggedIn();
+
+            return base.DeleteAllSignals();
+        }
+
+        public override Task DeleteSignals(IEnumerable<int> signalIds)
+        {
+            EnsureLoggedIn();
+
+            return base.DeleteSignals(signalIds);
+        }
+
+        public override Task DeleteSignals(IEnumerable<Signal> signals)
+        {
+            EnsureLoggedIn();
+
+            return base.DeleteSignals(signals);
         }
     }
 }

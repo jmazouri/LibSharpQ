@@ -2,6 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.1.0</Version>
+    <Authors>John Mazouri</Authors>
+    <Company />
+    <Product />
+    <Copyright>2017 John Mazouri</Copyright>
+    <Description>A client library for the Das Keyboard 5Q (and other cloud-enabled Das keyboards)</Description>
+    <PackageLicenseUrl>https://github.com/jmazouri/LibSharpQ/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/jmazouri/LibSharpQ</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jmazouri/LibSharpQ.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>das daskeyboard 5q</PackageTags>
+    <AssemblyVersion>0.0.1.0</AssemblyVersion>
+    <FileVersion>0.0.1.0</FileVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

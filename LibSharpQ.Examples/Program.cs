@@ -28,8 +28,10 @@ namespace LibSharpQ.Examples
             Console.WriteLine("Select a demo: ");
             Console.WriteLine("1. Rainbow F-Keys");
             Console.WriteLine("2. Snake");
-            Console.WriteLine("3. Audio Visualizer");
-            Console.WriteLine("4. Image Loader");
+            Console.WriteLine("3. Image Loader");
+            Console.WriteLine("4. Keypress Hotspot");
+
+            Console.WriteLine();
 
             Console.WriteLine("8. Clear All Signals");
             Console.WriteLine("9. Quit");
@@ -47,10 +49,10 @@ namespace LibSharpQ.Examples
                     await ChasingSnake.Execute(_client);
                     break;
                 case 3:
-                    await Visualizer.Execute(_client);
+                    await ImageLoader.Execute(_client);
                     break;
                 case 4:
-                    await ImageLoader.Execute(_client);
+                    await Keypress.Execute(_client);
                     break;
                 case 8:
                     await _client.DeleteAllSignals();

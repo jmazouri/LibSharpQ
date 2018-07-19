@@ -62,9 +62,28 @@ namespace LibSharpQ.Models
             Color = color;
         }
 
-        public Signal(string name, string zoneId, Color color) : this(name, zoneId, color.HexCode) { }
-        public Signal(string name, (int x, int y) position, Color color) : this(name, position, color.HexCode) { }
+        /// <summary>
+        /// Create a signal with the specified parameters
+        /// </summary>
+        /// <param name="name">The name of the signal</param>
+        /// <param name="zoneId">The zone for the signal to appear</param>
+        /// <param name="color">The color for the signal. Will use the Name if not null, otherwise HexCode.</param>
+        public Signal(string name, string zoneId, Color color) : this(name, zoneId, color.Name ?? color.HexCode) { }
 
+        /// <summary>
+        /// Create a signal with the specified parameters
+        /// </summary>
+        /// <param name="name">The name of the signal</param>
+        /// <param name="position">The location for the signal to appear</param>
+        /// <param name="color">The color for the signal. Will use the Name if not null, otherwise HexCode.</param>
+        public Signal(string name, (int x, int y) position, Color color) : this(name, position, color.Name ?? color.HexCode) { }
+
+        /// <summary>
+        /// Create a signal with the specified parameters
+        /// </summary>
+        /// <param name="name">The name of the signal</param>
+        /// <param name="position">The location for the signal to appear</param>
+        /// <param name="color">The color for the signal. Should be a predefined color name, or hexcode.</param>
         public Signal(string name, (int x, int y) position, string color) : this(name, $"{position.x},{position.y}", color) { }
 
         [JsonConstructor]
